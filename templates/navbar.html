@@ -1,0 +1,40 @@
+{% block navbar %}
+
+<nav>
+  <div id="nav-wrapper">
+
+    <ul>
+      <li>
+        <a class="logo" href="{% url 'index' %}">Noite.</a>
+      </li>
+    </ul>
+
+    <ul class="nav-direita">
+      <li>
+        <a class="link" href="#">Sobre</a>
+      </li>
+
+      <li class="dropdown-menu">
+
+        <div class="dropdown-icon">
+          <a href="{% url 'categorias' %}" class="link">
+            Artigos
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </div>
+
+        <div class="dropdown-itens">
+          {% for categoria in categorias %}
+            <a href="{% url 'artigos-por-categoria' categoria.id %}" class="item"> {{ categoria.nome }} </a>
+          {% endfor %}
+        </div>
+
+      </li>
+      <li>
+        <a class="btn-bordado" href="#subs">Subscrever</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+{% endblock navbar %}

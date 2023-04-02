@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% load static %} {% block header %}
+
+<header style="background-image:url('{% static 'images/header-background.jpg' %}');">
+  {% include "navbar.html" %} {% block base_title %}
+
+    <div class="center-align">
+      <h1> Artigos e as suas categorias</h1>
+      <hr>
+    </div>
+
+  {% endblock base_title %}
+</header>
+
+{% endblock header %} {% block content %}
+
+<div class="linha categorias">
+
+    {% for categoria in categorias %}
+
+      <div class="twelve colunas">
+
+        <div class="categoria">
+          <h2> {{ categoria.nome }} </h2>
+          <p> {{ categoria.descricao }} </p>
+        </div>
+
+        <div class="artigos-bottom" style="padding:40px 20px 0px; margin-bottom:20px;">
+          {% for publicacao in publicacoes  %}
+            {% if publicacao.categoria == categoria %}
+            
+            <div class="colunas">
+              <div class="artigo">
+                <div class="artigo-header">
+                  <a href="{% url 'ver-publicacao' publicacao.slug  %}">
+                    <img src="{% static publicacao.imagem.name %}" alt="imagem da publicacao">
+                  </a>
+                  <div class="titulo">
+                    <h4> {{ publicacao.titulo|title|truncatechars:25 }} </h4>
+                    <small> {{ publicacao.autor.get_full_name }} /</small>
+                    <small> {{ publicacao.categoria }} </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endif %}
+          {% endfor %}
+
+        </div>
+
+          <a href="{% url 'artigos-por-categoria' categoria.id %}" class="btn-bordado">Ver mais</a>
+
+      </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

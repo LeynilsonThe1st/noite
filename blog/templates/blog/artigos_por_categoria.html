@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% load static %} {% block header %}
+
+<header style="background-image:url('{% static 'images/header-background.jpg' %}');">
+  {% include "navbar.html" %} {% block base_title %}
+
+  <div class="center-align">
+    <h1> {{ categoria }} </h1>
+    <hr>
+  </div>
+
+  {% endblock base_title %}
+</header>
+
+{% endblock header %} {% block content %}
+<div class="artigos">
+  <div class="linha">
+
+    {% for publicacao in publicacoes %}
+    <div class="six colunas collapsed">
+      <div class="artigo horizontal">
+
+        <div class="artigo-header">
+          <a href="{% url 'ver-publicacao' publicacao.slug  %}">
+            <img src="{% static publicacao.imagem.name %}" alt="imagem da publicacao">
+          </a>
+        </div>
+
+        <div class="conteudo">
+          <div class="titulo">
+            <h4>{{ publicacao.titulo|title|truncatechars:20 }}</h4>
+            <small> {{ publicacao.autor.get_full_name }} </small>
+          </div>
+          <p>
+            {{ publicacao.conteudo|safe|truncatewords:15 }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+    {% empty %}
+    <h2>Sem pub...</h2>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock content %}

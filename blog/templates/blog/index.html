@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="artigos" style="padding-bottom:0;">
+
+  <div class="linha" style="padding-bottom:80px;">
+    <div class="twelve colunas text-center" id="artgs">
+      <h2>Esteja a par do que acontece a tua volta</h2>
+      <h3>Artigos recentes</h3>
+      <hr>
+    </div>
+  </div>
+
+  <div class="linha fluida">
+    <div class="eight colunas artigos-main">
+
+      {% for post in publicacoes|slice:5 %}
+
+        {% if forloop.counter == 3 %}
+
+          <div class="twelve colunas">
+            <div class="artigo">
+
+              <div class="artigo-header">
+                <a href="{% url 'ver-publicacao' post.slug  %}">
+                  <img src="{% static post.imagem.name %}" alt="imagem da publicacao">
+                </a>
+              </div>
+
+              <div class="conteudo">
+                <h4> {{ post.titulo|title }} </h4>
+                <p>
+                  {{ post.conteudo|safe|truncatewords:40 }}
+                </p>
+              </div>
+
+              <div class="time">
+                <i class="fa fa-clock-o"></i>
+                <span>{{ post.criado_em|timesince }} atrás</span>
+              </div>
+
+              <hr>
+
+              <div class="autor">
+                <img src=" {% static 'img/leyni.png' %} " alt="mia">
+                <h4> {{ post.autor.get_full_name }} </h4>
+              </div>
+              
+            </div>
+          </div>
+
+        {% else %}
+
+          <div class="six colunas">
+            <div class="artigo">
+
+              <div class="artigo-header">
+                <a href="{% url 'ver-publicacao' post.slug  %}">
+                  <img src="{% static post.imagem.name %}" alt="imagem da publicacao">
+                </a>
+              </div>
+
+              <div class="conteudo">
+                <h4> {{ post.titulo|title }} </h4>
+                <p>
+                  {{ post.conteudo|safe|truncatewords:"19" }}
+                </p>
+              </div>
+
+              <div class="time">
+                <i class="fa fa-clock-o"></i>
+                <span>{{ post.criado_em|timesince}} atrás</span>
+              </div>
+
+              <hr>
+
+              <div class="autor">
+                <img src=" {% static 'img/leyni.png' %} " alt="mia">
+                <h4>{{ post.autor.get_full_name }}</h4>
+              </div>
+
+            </div>
+          </div>
+        {% endif %}
+
+      {% empty %}
+      <h2>Sem publicacoes por enquanto.</h2>
+      {% endfor %}
+
+    </div>
+
+    <div class="four colunas artigos-side">
+
+      {% for post in publicacoes|slice:5 %}
+
+      <div class="twelve colunas">
+        <div class="artigo">
+
+          <div class="artigo-header">
+            <a href="{% url 'ver-publicacao' post.slug  %}">
+              <img src="{% static post.imagem.name %}" alt="imagem da publicacao">
+            </a>
+          </div>
+
+          <div class="titulo">
+            <h4 style="margin-bottom:5px;"> {{ post.titulo|title }} </h4>
+            <small> {{ post.autor.get_full_name }} / {{ post.categoria }} </small>
+          </div>
+          
+        </div>
+      </div>
+
+      {% empty %}
+      <h2>Sem publicacoes por enquanto.</h2>
+      {% endfor %}
+      
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

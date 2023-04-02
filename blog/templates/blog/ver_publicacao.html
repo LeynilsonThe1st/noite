@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_js %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'syntaxhighlighter/scripts/shCore.js'%}"></script>
+  <script type="text/javascript" src="{% static 'syntaxhighlighter/scripts/shBrushPython.js'%}"></script>
+  <script type="text/javascript">SyntaxHighlighter.all();</script>
+{% endblock css_js %}
+
+{% block header %}
+
+<header style="background-image:url('{% static publicacao.imagem.name %}');">
+
+  {% include "navbar.html" %}
+  <div id="big-title">
+    <h1 class="activador">{{ publicacao.titulo|title }} <hr> </h1>
+  </div>
+
+</header>
+
+{% endblock header %}
+
+{% block content %}
+
+<div class="linha">
+  <div class="blog twelve coluna">
+    <div class="texto">
+      <div class="publicacao-conteudo">
+        {{ publicacao.conteudo|safe }}
+      </div>
+
+      <div class="tags">
+
+        {% for tag in publicacao.get_tags %}
+        
+          <a class="tag" href="#"> {{ tag }} </a>
+
+        {% endfor %}
+      </div>
+
+      <div class="time" style="text-align:right;">
+        <i class="fa fa-calendar"></i>
+        <span> {{ publicacao.criado_em|date }} </span>
+      </div>
+
+      <hr>
+
+      <div class="autor">
+        <img src=" {% static 'img/leyni.png' %} " alt="leynilson">
+        <h4> {{ publicacao.autor.get_full_name }} </h4>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="linha total">
+  <div class="twelve colunas artigos-bottom">
+
+    {% for publicacao in publicacoes  %}
+
+    <div class=" colunas">
+      <div class="artigo">
+        <div class="artigo-header">
+          <a href="{% url 'ver-publicacao' publicacao.slug  %}">
+            <img src="{% static publicacao.imagem.name %}" alt="imagem da publicacao">
+          </a>
+          <div class="titulo">
+            <h4>{{ publicacao.titulo|title|truncatechars:25 }}</h4>
+            <small> {{ publicacao.autor.get_full_name }} </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+</div>
+
+<div class="comentario">
+  <div class="linha">
+    <div class="twelve coluna">
+      <div class="texto">
+
+        {% if novo_comentario %}
+        <div class="text-center">
+          <h2> O seu comentario será posto em avaliação </h2>
+          <h2> {{  novo_comentario.activo }} </h2>
+        </div>
+        {% else %}
+        
+        <div class="text-center">
+          <h2>O que achaste deste artigo?</h2>
+          <h3>Deixa o teu comentário</h3>
+        </div>
+
+        <form method="post">
+          <div class="comentario_form">
+            {{ comentario_form }}
+            {% csrf_token %}
+          </div>
+          <input class="btn-bordado smt" type="submit" value="Comentar">
+        </form>
+
+        {% endif %}
+        
+        <div class="comentarios">
+
+          {% for comentario in comentarios %}
+
+          <div class="user">
+            <img src=" {% static 'img/leyni.png' %} " alt="mia">
+            <div class="comment">
+              <div class="autor" id="id_autor">
+                <h4> {{ comentario.nome }} </h4>
+                <div class="time">
+                  <i class="fa fa-clock-o"></i>
+                  <span>{{ comentario.criado_em|timesince }} atrás</span>
+                </div>
+                
+              </div>
+              <p> {{ comentario.conteudo }} </p>
+            </div>
+          </div>
+
+          {% empty %}
+
+          <h2>Sem Comentários</h2>
+
+          {% endfor %}
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}

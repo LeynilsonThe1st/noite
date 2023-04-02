@@ -1,0 +1,232 @@
+/* --------------
+    Grid
+-------------- */
+.linha {
+  width: 96%;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+/* linha clearing */
+.linha:before,
+.linha:after {
+  content: " ";
+  display: table;
+}
+
+.linha:after {
+  clear: both;
+}
+
+.coluna,
+.colunas {
+  position: relative;
+  padding: 0 20px;
+  min-height: 1px;
+  float: left;
+}
+
+.coluna.centered,
+.colunas.centered {
+  float: none;
+  margin: 0 auto;
+}
+
+/* removed gutters */
+.linha.collapsed>.coluna,
+.linha.collapsed>.colunas,
+.coluna.collapsed,
+.colunas.collapsed {
+  padding: 0;
+}
+
+[class*="coluna"]+[class*="coluna"]:last-child {
+  float: right;
+}
+
+[class*="coluna"]+[class*="coluna"].end {
+  float: right;
+}
+
+/* coluna widths */
+.linha .one {
+  width: 8.33333%;
+}
+
+.linha .two {
+  width: 16.66667%;
+}
+
+.linha .three {
+  width: 25%;
+}
+
+.linha .four {
+  width: 33.33333%;
+}
+
+.linha .five {
+  width: 41.66667%;
+}
+
+.linha .six {
+  width: 50%;
+}
+
+.linha .seven {
+  width: 58.33333%;
+}
+
+.linha .eight {
+  width: 66.66667%;
+}
+
+.linha .nine {
+  width: 75%;
+}
+
+.linha .ten {
+  width: 83.33333%;
+}
+
+.linha .eleven {
+  width: 91.66667%;
+}
+
+.linha .twelve {
+  width: 100%;
+}
+
+/* Offsets */
+.linha .offset-1 {
+  margin-left: 8.33333%;
+}
+
+.linha .offset-2 {
+  margin-left: 16.66667%;
+}
+
+.linha .offset-3 {
+  margin-left: 25%;
+}
+
+.linha .offset-4 {
+  margin-left: 33.33333%;
+}
+
+.linha .offset-5 {
+  margin-left: 41.66667%;
+}
+
+.linha .offset-6 {
+  margin-left: 50%;
+}
+
+.linha .offset-7 {
+  margin-left: 58.33333%;
+}
+
+.linha .offset-8 {
+  margin-left: 66.66667%;
+}
+
+.linha .offset-9 {
+  margin-left: 75%;
+}
+
+.linha .offset-10 {
+  margin-left: 83.33333%;
+}
+
+.linha .offset-11 {
+  margin-left: 91.66667%;
+}
+
+/* Push/Pull */
+.linha .push-1 {
+  left: 8.33333%;
+}
+
+.linha .pull-1 {
+  right: 8.33333%;
+}
+
+.linha .push-2 {
+  left: 16.66667%;
+}
+
+.linha .pull-2 {
+  right: 16.66667%;
+}
+
+.linha .push-3 {
+  left: 25%;
+}
+
+.linha .pull-3 {
+  right: 25%;
+}
+
+.linha .push-4 {
+  left: 33.33333%;
+}
+
+.linha .pull-4 {
+  right: 33.33333%;
+}
+
+.linha .push-5 {
+  left: 41.66667%;
+}
+
+.linha .pull-5 {
+  right: 41.66667%;
+}
+
+.linha .push-6 {
+  left: 50%;
+}
+
+.linha .pull-6 {
+  right: 50%;
+}
+
+.linha .push-7 {
+  left: 58.33333%;
+}
+
+.linha .pull-7 {
+  right: 58.33333%;
+}
+
+.linha .push-8 {
+  left: 66.66667%;
+}
+
+.linha .pull-8 {
+  right: 66.66667%;
+}
+
+.linha .push-9 {
+  left: 75%;
+}
+
+.linha .pull-9 {
+  right: 75%;
+}
+
+.linha .push-10 {
+  left: 83.33333%;
+}
+
+.linha .pull-10 {
+  right: 83.33333%;
+}
+
+.linha .push-11 {
+  left: 91.66667%;
+}
+
+.linha .pull-11 {
+  right: 91.66667%;
+}

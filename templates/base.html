@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block css_js %}
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/blog.css' %}">
+    <script src=" {% static 'jquery-3.3.1.js' %} "></script>
+    <script src=" {% static 'main.js' %} "></script>
+  {% endblock css_js %}
+
+  <title>Meu Blog</title>
+</head>
+
+<body>
+
+
+  {% block header %}
+
+    <header style="background-image:url( {% static 'img/wh3.jpg' %} );">
+
+      {% include "navbar.html" %} {% block base_title %}
+
+        <div class="center-align">
+          <h1 class="activador">Fique a par de tudo que esta a acontecer no mundo, aqui e em primeira mão.</h1>
+          <div class="btn-group">
+            <a href="#" class="btn-bordado activo">Ver Agora</a>
+            <a href="#" class="btn-bordado">Ver Mais</a>
+          </div>
+        </div>
+
+        {% endblock base_title %}
+
+
+    </header>
+  {% endblock header %} {% block content %}
+    <!-- ------------------
+      Conteudo das páginas
+    <!-> ------------ <@-->
+  {% endblock content %}
+
+  <div class="subscrever" id="subs">
+    <div class="linha">
+      <div class="twelve coluna">
+        <div class="texto">
+
+          <div class="text-center">
+            <h2>Se Inscvreva</h2>
+            <h3>Inscreva-se no nosso boletim de notícias</h3>
+            <form method="post">
+              <div class="subscrever-form">
+                {% csrf_token %}
+                {{ subscrever_form }}
+              </div>
+              <input class="btn-bordado smt" type="submit" value="Subscrever">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="linha">
+      <div class="two coluna nt">
+        <a class="logo" href="#">Noite.</a>
+      </div>
+      <div class="eight coluna links">
+        {% for categoria in categorias %}
+          <a href="{% url 'artigos-por-categoria' categoria.id %}" class="link">{{ categoria.nome }}</a>
+        {% endfor %}
+      </div>
+      <div class="two coluna icones">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a class="activo" href="#"><i class="fa fa-arrow-up"></i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
